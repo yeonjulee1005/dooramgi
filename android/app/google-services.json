@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "566494786076",
+    "project_id": "dooramgi-224cf",
+    "storage_bucket": "dooramgi-224cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566494786076:android:2a95f5bfcfba6d2f17a5d9",
+        "android_client_info": {
+          "package_name": "com.dooramgi.dooramgi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566494786076-asf3lujja9ne19psop03ltic6hb140a9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dooramgi.dooramgi",
+            "certificate_hash": "02c7f98d7dc99a212a429288923c7f978ec2bc8c"
+          }
+        },
+        {
+          "client_id": "566494786076-kbojnvmib5ck2uhil79dv3a026af4vfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKr3gEHieHdVfd7SP1hrNnh8ATRwLd0kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566494786076-kbojnvmib5ck2uhil79dv3a026af4vfn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
