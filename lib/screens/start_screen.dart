@@ -1,23 +1,18 @@
-import 'package:dooramgi/screens/start/intro_page.dart';
-import 'package:dooramgi/screens/start/auth_page.dart';
+import 'package:dooramgi/screens/start/intro_pate.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
-  StartScreen({Key? key}) : super(key: key);
-
-  PageController _pageController = PageController();
+  const StartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        // physics: NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: [
-          IntroPage(_pageController),
-          AuthPage(),
-        ],
-      ),
+          children: [
+            IntroPage(),
+            Container(color: Colors.blueAccent,),
+            Container(color: Colors.redAccent,),
+          ]),
     );
   }
 }

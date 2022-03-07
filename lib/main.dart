@@ -1,75 +1,68 @@
+import 'package:beamer/beamer.dart';
+import 'package:dooramgi/router/locations.dart';
+import 'package:dooramgi/screens/splash_screen.dart';
+import 'package:dooramgi/screens/start_screen.dart';
+import 'package:dooramgi/utils/logger.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
+final _routerDelegate = BeamerDelegate(
+  guards: [
+    BeamGuard(
+        pathBlueprints: ['/'],
+        check: (context, location){
+          return false;
+        }, showPage: BeamPage(child: StartScreen()
+    )
+    )
+  ],
+    locationBuilder: BeamerLocationBuilder(
+        beamLocations: [
+          HomeLocation()
+        ]
+    )
+);
 
 void main() {
-  runApp(DooramgiApp());
+  logger.d('open Applications');
+  runApp(MyApp());
 }
 
-final String SplashAnimalImg = 'assets/images/dooramgi_animal.svg';
-final String SplashWheelImg = 'assets/images/dooramgi_wheel.svg';
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: Future.delayed(Duration(seconds: 1), () => 100),
+        builder: (context, snapshot) {
+          return AnimatedSwitcher(
+              duration:Duration(seconds: 1),
+              child: _splashLoadingWidget(snapshot));
+        });
+  }
+
+  Widget _splashLoadingWidget(AsyncSnapshot<Object?> snapshot) {
+    if (snapshot.hasError) {
+      print('error occur while loading.');
+      return Text('error occur!');
+    } else if (snapshot.hasData) {
+      return DooramgiApp();
+    } else {
+      return SplashScreen();
+    }
+  }
+}
 
 class DooramgiApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SplashScreen(),
-    );
-  }
-}
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen>
-    with TickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 3),
-    vsync: this,
-  )..repeat(reverse: true);
-  late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.easeInToLinear
-  );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  const DooramgiApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            RotationTransition(
-              turns: _animation,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset(
-                  SplashWheelImg,
-                  width: 120,
-                  height: 120,
-                ),
-              ),
-            ),
-            SvgPicture.asset(
-              SplashAnimalImg,
-              width: 200,
-              height: 200,
-            ),
-          ],
-        ),
+    return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+        primarySwatch: Colors.orange,
       ),
-      backgroundColor: Color(0XFFfdfef8),
+      routeInformationParser: BeamerParser(),
+      routerDelegate: _routerDelegate,
     );
   }
 }
