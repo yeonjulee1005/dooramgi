@@ -60,6 +60,25 @@ class DooramgiApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Pretendard',
         primarySwatch: Colors.orange,
+        textTheme: TextTheme(
+            button: TextStyle(color: Colors.white)
+        ),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+                backgroundColor: Color(0xFF174378),
+                primary: Colors.white,
+                minimumSize: Size.fromHeight(40)
+            )
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            fontSize: 24,
+            fontFamily: 'Pretendard',
+            color: Colors.black54
+          )
+        ),
       ),
       routeInformationParser: BeamerParser(),
       routerDelegate: _routerDelegate,

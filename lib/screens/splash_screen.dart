@@ -1,3 +1,4 @@
+import 'package:dooramgi/constants/common_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
             RotationTransition(
               turns: _animation,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(common_small_padding),
                 child: SvgPicture.asset(
                   SplashWheelImg,
                   width: 120,
