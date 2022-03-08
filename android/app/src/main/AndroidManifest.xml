@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dooramgi.dooramgi">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    <application
         android:label="dooramgi"
         android:name="${applicationName}"

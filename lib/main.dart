@@ -2,15 +2,17 @@ import 'package:beamer/beamer.dart';
 import 'package:dooramgi/router/locations.dart';
 import 'package:dooramgi/screens/splash_screen.dart';
 import 'package:dooramgi/screens/start_screen.dart';
+import 'package:dooramgi/states/user_provider.dart';
 import 'package:dooramgi/utils/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 final _routerDelegate = BeamerDelegate(
   guards: [
     BeamGuard(
         pathBlueprints: ['/'],
         check: (context, location){
-          return false;
+          return context.watch<UserProvider>().userState;
         }, showPage: BeamPage(child: StartScreen()
     )
     )
@@ -56,32 +58,36 @@ class DooramgiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        fontFamily: 'Pretendard',
-        primarySwatch: Colors.orange,
-        textTheme: TextTheme(
-            button: TextStyle(color: Colors.white)
+    return ChangeNotifierProvider<UserProvider>(
+      create: (BuildContext context) { return UserProvider(); },
+      child: MaterialApp.router(
+        theme: ThemeData(
+          fontFamily: 'Pretendard',
+          primarySwatch: Colors.orange,
+          textTheme: TextTheme(
+              button: TextStyle(color: Colors.white)
+          ),
+          textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF174378),
+                  primary: Colors.white,
+                  minimumSize: Size.fromHeight(40)
+              )
+          ),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            titleTextStyle: TextStyle(
+              fontSize: 24,
+              fontFamily: 'Pretendard',
+              color: Colors.black54
+            ),
+            actionsIconTheme: IconThemeData(color: Colors.black54),
+          ),
         ),
-        textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-                backgroundColor: Color(0xFF174378),
-                primary: Colors.white,
-                minimumSize: Size.fromHeight(40)
-            )
-        ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          titleTextStyle: TextStyle(
-            fontSize: 24,
-            fontFamily: 'Pretendard',
-            color: Colors.black54
-          )
-        ),
+        routeInformationParser: BeamerParser(),
+        routerDelegate: _routerDelegate,
       ),
-      routeInformationParser: BeamerParser(),
-      routerDelegate: _routerDelegate,
     );
   }
 }
